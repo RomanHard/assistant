@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 export const App = () => {
   const handleMenuToggle = () => {
-    // handle menu toggle logic here
+    // Логіка відкриття/закриття меню
   };
 
   return (
@@ -20,16 +20,24 @@ export const App = () => {
         <nav className="dropdown-menu">
           <ul className="nav-list">
             <li className="nav-list-item">
-              <Link to="/expenses" className="nav-link">Cost accounting</Link>
+              <Link to="/expenses" className="nav-link">
+              Cost accounting
+              </Link>
             </li>
             <li className="nav-list-item">
-              <Link to="/notes" className="nav-link">Notes</Link>
+              <Link to="/notes" className="nav-link">
+              Notes
+              </Link>
             </li>
             <li className="nav-list-item">
-              <Link to="/tasks" className="nav-link">Tasks</Link>
+              <Link to="/tasks" className="nav-link">
+              Tasks
+              </Link>
             </li>
             <li className="nav-list-item">
-              <Link to="/settings" className="nav-link">Settings</Link>
+              <Link to="/settings" className="nav-link">
+              Settings
+              </Link>
             </li>
           </ul>
         </nav>
@@ -38,12 +46,14 @@ export const App = () => {
           <div className="menu-icon"></div>
           <div className="menu-icon"></div>
         </div>
-        <Routes>
-          <Route path="/expenses" element={<Expenses />} />
-          <Route path="/notes" element={<Notes />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
+        <div className="main-content">
+          <Routes>
+            <Route path="/expenses" element={<Expenses />} />
+            <Route path="/notes" element={<Notes />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );
