@@ -46,7 +46,8 @@ export const App = () => {
           <div className="menu-icon"></div>
           <div className="menu-icon"></div>
         </div>
-        <div className="main-content">
+      </div>
+      <div className="main-content">
           <Routes>
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/notes" element={<Notes />} />
@@ -54,7 +55,7 @@ export const App = () => {
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
-      </div>
     </BrowserRouter>
+    
   );
 };
