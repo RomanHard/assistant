@@ -1,0 +1,29 @@
+
+  .expenses-container {
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top-block {
+    flex: 1;
+    display: flex;
+  }
+
+  .left-block {
+    flex: 1;
+    background-color: rgb(218, 215, 205);
+  }
+  
+  .right-block {
+    flex: 1;
+    background-color: rgb(218, 215, 205);
+  }
+  
+  .bottom-block {
+    flex: 1;
+    background-color: rgb(218, 215, 205);
+  }
+  
