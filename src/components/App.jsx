@@ -8,7 +8,10 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 export const App = () => {
   const handleMenuToggle = () => {
-    // Логіка відкриття/закриття меню
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    dropdownMenu.classList.toggle('active');
+    menuToggle.classList.toggle('active');
   };
 
   return (
