@@ -3,6 +3,8 @@ import './Expenses-module.css';
 import LeftBlock from './block/LeftBlock';
 
 const Expenses = () => {
+
+
   return (
     <>
       <LeftBlock />
