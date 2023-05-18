@@ -1,0 +1,40 @@
+.left-block {
+    width: 50%;
+    padding: 20px;
+    background-color: #f2f2f2;
+    float: left;
+  }
+  
+  .left-block h2 {
+    text-align: center;
+  }
+  
+  .income-form {
+    margin-top: 20px;
+  }
+  
+  .income-source,
+  .income-amount,
+  .income-comment,
+  .income-categories {
+    margin-bottom: 10px;
+  }
+  
+  .income-categories label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .income-categories div {
+    margin-top: 5px;
+  }
+  
+  .income-categories input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  button {
+    display: block;
+    margin: 10px auto;
+  }
+  

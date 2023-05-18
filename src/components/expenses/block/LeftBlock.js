@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './leftBlock-module.css';
 
 const LeftBlock = () => {
   const [showModal, setShowModal] = useState(false);
