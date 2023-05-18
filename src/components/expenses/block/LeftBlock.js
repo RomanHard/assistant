@@ -73,11 +73,11 @@ const LeftBlock = () => {
             <option value="" disabled>
               Виберіть категорію
             </option>
+            <option value="create-category">Додати/Редагувати категорію</option>
             {categories.map((category, index) => (
               <option key={index} value={category.name}>
                 {category.name}
               </option>
-               <option value="create-category">Додати/Редагувати категорію</option>
             ))}
           </select>
           {selectedCategory === 'create-category' && showModal && (
