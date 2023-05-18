@@ -34,6 +34,20 @@ const LeftBlock = () => {
     setShowModal(false);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      setShowModal(false);
+    }
+  };
+
+  const handleModalClick = (e) => {
+    e.stopPropagation();
+  };
+
+  const handleOverlayClick = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="left-block">
       <h2 className="block-title">Доходи</h2>
@@ -51,11 +65,13 @@ const LeftBlock = () => {
             <option value="create-category">Створити категорію</option>
           </select>
           {selectedCategory === 'create-category' && (
-            <div className="modal">
-              <button className="modal-close" onClick={handleCloseModal}>
-                &times;
-              </button>
-              Вміст модального вікна
+            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick}>
+              <div className="modal-content" onClick={handleModalClick}>
+                Вміст модального вікна
+                <button className="modal-close" onClick={handleCloseModal}>
+                  &times;
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -68,11 +84,13 @@ const LeftBlock = () => {
             <option value="create-wallet">Створити гаманець</option>
           </select>
           {selectedWallet === 'create-wallet' && (
-            <div className="modal">
-              <button className="modal-close" onClick={handleCloseModal}>
-                &times;
-              </button>
-              Вміст модального вікна 123
+            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick}>
+              <div className="modal-content" onClick={handleModalClick}>
+                Вміст модального вікна
+                <button className="modal-close" onClick={handleCloseModal}>
+                  &times;
+                </button>
+              </div>
             </div>
           )}
         </div>
