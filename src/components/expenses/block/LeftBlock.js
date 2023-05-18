@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './leftBlock-module.css';
 
 const LeftBlock = () => {
@@ -24,11 +24,13 @@ const LeftBlock = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setSelectedCategory('');
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
       setShowModal(false);
+      setSelectedCategory('');
     }
   };
 
@@ -37,8 +39,15 @@ const LeftBlock = () => {
   };
 
   const handleOverlayClick = () => {
-    setShowModal(true);
+    setShowModal(false);
   };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
     <div className="left-block">
@@ -50,23 +59,28 @@ const LeftBlock = () => {
         </div>
         <div className="input-field">
           <label htmlFor="category">Категорія:</label>
-          <select id="category" onChange={handleCategoryChange} className="category-select" defaultValue="">
+          <select
+  id="category"
+  value={selectedCategory}
+  onChange={handleCategoryChange}
+  className="category-select"
+>
   <option value="" disabled>
     Виберіть категорію
   </option>
   <option value="create-category">Створити категорію</option>
 </select>
-          {selectedCategory === 'create-category' && (
-            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick} onKeyDown={handleKeyDown}>
-            <div className="modal-content" onClick={handleModalClick}>
-              Вміст модального вікна
-              <button className="modal-close" onClick={handleCloseModal}>
-                &times;
-              </button>
-            </div>
-          </div>
-          
-          )}
+{selectedCategory === 'create-category' && showModal && (
+        <div className="modal" onClick={handleOverlayClick}>
+          <div className="modal-content" onClick={handleModalClick}>
+            Вміст модального вікна
+            <button className="modal-close" onClick={handleCloseModal}>
+              &times;
+            </button>
+    </div>
+  </div>
+)}
+
         </div>
         {/* <div className="input-field">
           <label htmlFor="wallet">Гаманець:</label>
