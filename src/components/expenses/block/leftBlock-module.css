@@ -37,4 +37,21 @@
     display: block;
     margin: 10px auto;
   }
+  .modal {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .left-block {
+    position: relative;
+    padding: 20px;
+  }
   

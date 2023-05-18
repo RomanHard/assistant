@@ -3,9 +3,35 @@ import './leftBlock-module.css';
 
 const LeftBlock = () => {
   const [showModal, setShowModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedWallet, setSelectedWallet] = useState('');
 
   const handleEditCategories = () => {
     setShowModal(true);
+  };
+
+  const handleCategoryChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedCategory(selectedValue);
+    if (selectedValue === 'create-category') {
+      handleEditCategories();
+    }
+  };
+
+  const handleEditWallets = () => {
+    setShowModal(true);
+  };
+
+  const handleWalletChange = (e) => {
+    const selectedValue = e.target.value;
+    setSelectedWallet(selectedValue);
+    if (selectedValue === 'create-wallet') {
+      handleEditWallets();
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -18,19 +44,37 @@ const LeftBlock = () => {
         </div>
         <div className="input-field">
           <label htmlFor="category">Категорія:</label>
-          <select id="category">
-            <option value="category1">Категорія 1</option>
-            <option value="category2">Категорія 2</option>
-            <option value="category3">Категорія 3</option>
+          <select id="category" onChange={handleCategoryChange} className="category-select">
+            <option value="" disabled selected>
+              Виберіть категорію
+            </option>
+            <option value="create-category">Створити категорію</option>
           </select>
+          {selectedCategory === 'create-category' && (
+            <div className="modal">
+              <button className="modal-close" onClick={handleCloseModal}>
+                &times;
+              </button>
+              Вміст модального вікна
+            </div>
+          )}
         </div>
         <div className="input-field">
           <label htmlFor="wallet">Гаманець:</label>
-          <select id="wallet">
-            <option value="wallet1">Гаманець 1</option>
-            <option value="wallet2">Гаманець 2</option>
-            <option value="wallet3">Гаманець 3</option>
+          <select id="wallet" onChange={handleWalletChange}>
+            <option value="" disabled selected>
+              Виберіть гаманець
+            </option>
+            <option value="create-wallet">Створити гаманець</option>
           </select>
+          {selectedWallet === 'create-wallet' && (
+            <div className="modal">
+              <button className="modal-close" onClick={handleCloseModal}>
+                &times;
+              </button>
+              Вміст модального вікна 123
+            </div>
+          )}
         </div>
         <div className="input-field">
           <label htmlFor="date">Дата:</label>
@@ -40,11 +84,6 @@ const LeftBlock = () => {
           <button type="submit">Додати</button>
           <button type="reset">Скинути</button>
         </div>
-        {showModal && (
-          <div className="modal" style={{ backgroundColor: '#588157' }}>
-            {/* Вміст модального вікна */}
-          </div>
-        )}
       </div>
     </div>
   );
