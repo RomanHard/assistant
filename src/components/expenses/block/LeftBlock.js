@@ -73,7 +73,20 @@ const LeftBlock = () => {
 {selectedCategory === 'create-category' && showModal && (
         <div className="modal" onClick={handleOverlayClick}>
           <div className="modal-content" onClick={handleModalClick}>
-            Вміст модального вікна
+         
+          <h3>Додати/Редагувати категорію</h3>
+  <form>
+    <div className="form-group">
+      <label htmlFor="categoryName">Назва категорії:</label>
+      <input type="text" id="categoryName" name="categoryName" />
+    </div>
+    <div className="form-group">
+      <label htmlFor="categoryColor">Колір категорії:</label>
+      <input type="color" id="categoryColor" name="categoryColor" />
+    </div>
+    <button type="submit">Зберегти</button>
+  </form>
+  
             <button className="modal-close" onClick={handleCloseModal}>
               &times;
             </button>
