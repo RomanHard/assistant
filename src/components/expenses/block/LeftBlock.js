@@ -4,31 +4,23 @@ import './leftBlock-module.css';
 const LeftBlock = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedWallet, setSelectedWallet] = useState('');
-
-  const handleEditCategories = () => {
-    setShowModal(true);
-  };
+  // const [selectedWallet, setSelectedWallet] = useState('');
 
   const handleCategoryChange = (e) => {
     const selectedValue = e.target.value;
     setSelectedCategory(selectedValue);
     if (selectedValue === 'create-category') {
-      handleEditCategories();
+      setShowModal(true);
     }
   };
 
-  const handleEditWallets = () => {
-    setShowModal(true);
-  };
-
-  const handleWalletChange = (e) => {
-    const selectedValue = e.target.value;
-    setSelectedWallet(selectedValue);
-    if (selectedValue === 'create-wallet') {
-      handleEditWallets();
-    }
-  };
+  // const handleWalletChange = (e) => {
+  //   const selectedValue = e.target.value;
+  //   setSelectedWallet(selectedValue);
+  //   if (selectedValue === 'create-wallet') {
+  //     setShowModal(true);
+  //   }
+  // };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -45,7 +37,7 @@ const LeftBlock = () => {
   };
 
   const handleOverlayClick = () => {
-    setShowModal(false);
+    setShowModal(true);
   };
 
   return (
@@ -58,42 +50,44 @@ const LeftBlock = () => {
         </div>
         <div className="input-field">
           <label htmlFor="category">Категорія:</label>
-          <select id="category" onChange={handleCategoryChange} className="category-select">
-            <option value="" disabled selected>
-              Виберіть категорію
-            </option>
-            <option value="create-category">Створити категорію</option>
-          </select>
+          <select id="category" onChange={handleCategoryChange} className="category-select" defaultValue="">
+  <option value="" disabled>
+    Виберіть категорію
+  </option>
+  <option value="create-category">Створити категорію</option>
+</select>
           {selectedCategory === 'create-category' && (
-            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick}>
-              <div className="modal-content" onClick={handleModalClick}>
-                Вміст модального вікна
-                <button className="modal-close" onClick={handleCloseModal}>
-                  &times;
-                </button>
-              </div>
+            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick} onKeyDown={handleKeyDown}>
+            <div className="modal-content" onClick={handleModalClick}>
+              Вміст модального вікна
+              <button className="modal-close" onClick={handleCloseModal}>
+                &times;
+              </button>
             </div>
+          </div>
+          
           )}
         </div>
-        <div className="input-field">
+        {/* <div className="input-field">
           <label htmlFor="wallet">Гаманець:</label>
           <select id="wallet" onChange={handleWalletChange}>
-            <option value="" disabled selected>
+            <option value="" disabled defaultValue="">
               Виберіть гаманець
             </option>
             <option value="create-wallet">Створити гаманець</option>
           </select>
           {selectedWallet === 'create-wallet' && (
-            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick}>
-              <div className="modal-content" onClick={handleModalClick}>
-                Вміст модального вікна
-                <button className="modal-close" onClick={handleCloseModal}>
-                  &times;
-                </button>
-              </div>
-            </div>
+            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick} onKeyDown={handleKeyDown}>
+  <div className="modal-content" onClick={handleModalClick}>
+    Вміст модального вікна
+    <button className="modal-close" onClick={handleCloseModal}>
+      &times;
+    </button>
+  </div>
+</div>
+
           )}
-        </div>
+        </div> */}
         <div className="input-field">
           <label htmlFor="date">Дата:</label>
           <input type="date" id="date" defaultValue={new Date().toISOString().split('T')[0]} />

@@ -37,8 +37,9 @@
     display: block;
     margin: 10px auto;
   }
+  
   .modal {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     right: 20px;
@@ -50,8 +51,9 @@
     z-index: 9999;
   }
   
-  .left-block {
+  .modal-content {
     position: relative;
+    background-color: #fff;
     padding: 20px;
   }
   
