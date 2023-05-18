@@ -4,7 +4,7 @@ import './leftBlock-module.css';
 const LeftBlock = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
-  // const [selectedWallet, setSelectedWallet] = useState('');
+  const [categories, setCategories] = useState([]);
 
   const handleCategoryChange = (e) => {
     const selectedValue = e.target.value;
@@ -13,14 +13,6 @@ const LeftBlock = () => {
       setShowModal(true);
     }
   };
-
-  // const handleWalletChange = (e) => {
-  //   const selectedValue = e.target.value;
-  //   setSelectedWallet(selectedValue);
-  //   if (selectedValue === 'create-wallet') {
-  //     setShowModal(true);
-  //   }
-  // };
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -42,6 +34,19 @@ const LeftBlock = () => {
     setShowModal(false);
   };
 
+  const handleSaveCategory = (e) => {
+    e.preventDefault();
+    const categoryName = document.getElementById('categoryName').value;
+    const categoryColor = document.getElementById('categoryColor').value;
+    const newCategory = {
+      name: categoryName,
+      color: categoryColor,
+    };
+    setCategories([...categories, newCategory]);
+    setShowModal(false);
+    setSelectedCategory('');
+  };
+
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     return () => {
@@ -60,61 +65,45 @@ const LeftBlock = () => {
         <div className="input-field">
           <label htmlFor="category">Категорія:</label>
           <select
-  id="category"
-  value={selectedCategory}
-  onChange={handleCategoryChange}
-  className="category-select"
->
-  <option value="" disabled>
-    Виберіть категорію
-  </option>
-  <option value="create-category">Створити категорію</option>
-</select>
-{selectedCategory === 'create-category' && showModal && (
-        <div className="modal" onClick={handleOverlayClick}>
-          <div className="modal-content" onClick={handleModalClick}>
-         
-          <h3>Додати/Редагувати категорію</h3>
-  <form>
-    <div className="form-group">
-      <label htmlFor="categoryName">Назва категорії:</label>
-      <input type="text" id="categoryName" name="categoryName" />
-    </div>
-    <div className="form-group">
-      <label htmlFor="categoryColor">Колір категорії:</label>
-      <input type="color" id="categoryColor" name="categoryColor" />
-    </div>
-    <button type="submit">Зберегти</button>
-  </form>
-  
-            <button className="modal-close" onClick={handleCloseModal}>
-              &times;
-            </button>
+            id="category"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className="category-select"
+          >
+            <option value="" disabled>
+              Виберіть категорію
+            </option>
+            {categories.map((category, index) => (
+              <option key={index} value={category.name}>
+                {category.name}
+              </option>
+               <option value="create-category">Додати/Редагувати категорію</option>
+            ))}
+          </select>
+          {selectedCategory === 'create-category' && showModal && (
+            <div className="modal" onClick={handleOverlayClick}>
+              <div className="modal-content" onClick={handleModalClick}>
+                <h3>Додати/Редагувати категорію</h3>
+                <form onSubmit={handleSaveCategory}>
+                  <div className="form-group">
+                    <label htmlFor="categoryName">Назва категорії:</label>
+                    <input type="text" id="categoryName" name="categoryName" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="categoryColor">Колір категорії:</label>
+                    <input type="color" id="categoryColor" name="categoryColor" />
+                  </div>
+                  <button type="submit">Зберегти</button>
+                </form>
+                <button className="modal-close" onClick={handleCloseModal}>
+                  &times;
+                </button>
+
     </div>
   </div>
 )}
 
         </div>
-        {/* <div className="input-field">
-          <label htmlFor="wallet">Гаманець:</label>
-          <select id="wallet" onChange={handleWalletChange}>
-            <option value="" disabled defaultValue="">
-              Виберіть гаманець
-            </option>
-            <option value="create-wallet">Створити гаманець</option>
-          </select>
-          {selectedWallet === 'create-wallet' && (
-            <div className={`modal ${showModal ? 'active' : ''}`} onClick={handleOverlayClick} onKeyDown={handleKeyDown}>
-  <div className="modal-content" onClick={handleModalClick}>
-    Вміст модального вікна
-    <button className="modal-close" onClick={handleCloseModal}>
-      &times;
-    </button>
-  </div>
-</div>
-
-          )}
-        </div> */}
         <div className="input-field">
           <label htmlFor="date">Дата:</label>
           <input type="date" id="date" defaultValue={new Date().toISOString().split('T')[0]} />
