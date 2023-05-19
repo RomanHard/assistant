@@ -26,13 +26,6 @@ const LeftBlock = () => {
     }
   };
 
-  const handleModalClick = (e) => {
-    e.stopPropagation();
-  };
-
-  const handleOverlayClick = () => {
-    setShowModal(false);
-  };
 
   const handleSaveCategory = (e) => {
     e.preventDefault();
@@ -81,8 +74,8 @@ const LeftBlock = () => {
             ))}
           </select>
           {selectedCategory === 'create-category' && showModal && (
-            <div className="modal" onClick={handleOverlayClick}>
-              <div className="modal-content" onClick={handleModalClick}>
+            <div className="modal" >
+              <div className="modal-content" >
                 <h3>Додати/Редагувати категорію</h3>
                 <form onSubmit={handleSaveCategory}>
                   <div className="form-group">
@@ -100,7 +93,7 @@ const LeftBlock = () => {
                 </button>
 
     </div>
-    <div className="modal-overlay" onClick={handleOverlayClick}>
+    <div className="modal-overlay" >
       
     </div>
   </div>
