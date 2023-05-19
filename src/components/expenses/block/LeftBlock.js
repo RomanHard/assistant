@@ -100,6 +100,9 @@ const LeftBlock = () => {
                 </button>
 
     </div>
+    <div className="modal-overlay" onClick={handleOverlayClick}>
+      
+    </div>
   </div>
 )}
 
