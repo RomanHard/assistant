@@ -26,6 +26,12 @@ const LeftBlock = () => {
     }
   };
 
+  const handleDeleteCategory = (index) => {
+    const updatedCategories = [...categories];
+    updatedCategories.splice(index, 1);
+    setCategories(updatedCategories);
+  };
+  
 
   const handleSaveCategory = (e) => {
     e.preventDefault();
@@ -36,9 +42,9 @@ const LeftBlock = () => {
       color: categoryColor,
     };
     setCategories([...categories, newCategory]);
-    setShowModal(false);
     setSelectedCategory('');
   };
+  
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
@@ -94,7 +100,15 @@ const LeftBlock = () => {
 
     </div>
     <div className="modal-overlay" >
-      
+    <h3>Категорії:</h3>
+    <ul>
+  {categories.map((category, index) => (
+    <li key={index}>
+      {category.name}
+      <button onClick={() => handleDeleteCategory(index)}>Видалити</button>
+    </li>
+  ))}
+</ul>
     </div>
   </div>
 )}
