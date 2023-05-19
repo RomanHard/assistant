@@ -42,7 +42,6 @@ const LeftBlock = () => {
       color: categoryColor,
     };
     setCategories([...categories, newCategory]);
-    setSelectedCategory('');
   };
   
 
