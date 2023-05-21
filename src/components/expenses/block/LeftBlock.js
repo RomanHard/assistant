@@ -31,7 +31,25 @@ const LeftBlock = () => {
     updatedCategories.splice(index, 1);
     setCategories(updatedCategories);
   };
-  
+
+  const sendCategoriesToServer = (category) => {
+    fetch('http://localhost:1727/saveData', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(category),
+    })
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error('Failed to save data');
+      }
+    })
+    .then((data) => console.log('Category sent to server:', data.message))
+    .catch((error) => console.error('Error sending categories to server:', error.message));     
+  };
 
   const handleSaveCategory = (e) => {
     e.preventDefault();
@@ -39,18 +57,36 @@ const LeftBlock = () => {
     const categoryColor = document.getElementById('categoryColor').value;
     const newCategory = {
       name: categoryName,
-      color: categoryColor,
+      color: categoryColor
     };
     setCategories([...categories, newCategory]);
+    sendCategoriesToServer(newCategory); // Відправка категорій на сервер після додавання нової
+  };
+  
+  const fetchCategoriesFromServer = () => {
+    fetch('http://localhost:1727/getData')
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error('Failed to fetch categories');
+        }
+      })
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => console.error('Error fetching categories from server:', error.message));
   };
   
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
+    fetchCategoriesFromServer();
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
+  
 
   return (
     <div className="left-block">
