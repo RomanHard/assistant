@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './leftBlock-module.css';
 
+
 const LeftBlock = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -27,10 +28,20 @@ const LeftBlock = () => {
   };
 
   const handleDeleteCategory = (index) => {
+    const categoryId = categories[index]._id; // Отримати ідентифікатор категорії
     const updatedCategories = [...categories];
     updatedCategories.splice(index, 1);
     setCategories(updatedCategories);
+    
+    // Відправити запит на сервер для видалення категорії
+    fetch(`http://localhost:1727/deleteCategory/${categoryId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => console.log('Category deleted:', data))
+      .catch((error) => console.error('Error deleting category:', error));
   };
+  
 
   const sendCategoriesToServer = (category) => {
     fetch('http://localhost:1727/saveData', {

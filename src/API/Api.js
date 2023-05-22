@@ -1,3 +1,21 @@
+import cors from 'cors';
+
+const corsOptions = {
+    origin: 'http://localhost:1727',
+    credentials: true,
+  };
+  
+  const fetchCategoriesFromServer = () => {
+    fetch('http://localhost:1727/getData', corsOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => console.error('Error fetching categories from server:', error));
+  };
+
+  
+  
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -22,7 +40,7 @@ app.use(function(req, res, next) {
     next();
   });
 
-  
+  app.use(cors());
 app.post('/saveData', async (req, res) => {
   try {
     // Connect the client to the server
