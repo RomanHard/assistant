@@ -1,15 +1,13 @@
-import 'esm';
-import express from 'express';
-import cors from 'cors';
-
 const express = require('express');
+const cors = require('cors');
+const MongoClient = require('mongodb').MongoClient;
+const ServerApiVersion = require('mongodb').ServerApiVersion;
+
 const app = express();
 app.use(express.json());
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://romeenice:4598104asd@cluster.xycmu4l.mongodb.net/?retryWrites=true&w=majority";
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -24,12 +22,11 @@ app.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
-  });
+});
 
-  app.use(cors());
+app.use(cors());
 app.post('/saveData', async (req, res) => {
   try {
-    // Connect the client to the server
     await client.connect();
 
     const database = client.db('assistant');
@@ -66,5 +63,4 @@ app.get('/getData', async (req, res) => {
     } finally {
       await client.close();
     }
-  });
-  
+});
