@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
-const MongoClient = require('mongodb').MongoClient;
-const ServerApiVersion = require('mongodb').ServerApiVersion;
+const { MongoClient, ObjectID, ServerApiVersion } = require('mongodb');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const uri = "mongodb+srv://romeenice:4598104asd@cluster.xycmu4l.mongodb.net/?retryWrites=true&w=majority";
 
@@ -27,7 +27,6 @@ client.connect().then(() => {
       next();
   });
 
-  app.use(cors());
   app.post('/saveData', async (req, res) => {
     try {
       const database = client.db('assistant');
@@ -59,26 +58,42 @@ client.connect().then(() => {
         res.status(500).send('An error occurred while retrieving data');
       }
   });
-}).catch(err => {
-  console.log("Error connecting to MongoDB: ", err);
+
+//   app.delete('/deleteCategory/:id', async (req, res) => {
+//     try {
+//       const { id } = req.params;
+//       const database = client.db('assistant');
+//       const collection = database.collection('zinger');
+
+//       // Assuming the id is in MongoDB's ObjectID format
+//       const result = await collection.deleteOne({ _id: new ObjectID(id) });
+//       if (result.deletedCount === 1) {
+//         res.status(200).json({ message: "Successfully deleted category" });
+//       } else {
+//         res.status(404).json({ message: "Category not found" });
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).send(error.message);
+//     }
+//   });
+
+// }).catch(err => {
+//   console.log("Error connecting to MongoDB: ", err);
 });
 
-app.delete('/deleteCategory/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const database = client.db('assistant');
-    const collection = database.collection('zinger');
 
-    // Assuming the id is in MongoDB's ObjectID format
-    const result = await collection.deleteOne({ _id: new MongoClient.ObjectID(id) });
-
-    if (result.deletedCount === 1) {
-      res.status(200).json({ message: "Successfully deleted category" });
-    } else {
-      res.status(404).json({ message: "Category not found" });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('An error occurred while trying to delete category');
-  }
-});
+   app.delete('/deleteCategory/:id', async (req, res) => {
+    res.send({ message: "hello" });
+      //  console.log(req)
+      //   const { id } = req.params;
+      //   const database = client.db('assistant');
+      //   const collection = database.collection('zinger');
+  
+      //   const result = await collection.deleteOne({ _id: new ObjectID(id) });
+      //   // if (result.deletedCount === 1) {
+        //   res.status(200).json({ message: "Successfully deleted category" });
+        // } else {
+        //   res.status(404).json({ message: "Category not found" });
+        // }
+    });

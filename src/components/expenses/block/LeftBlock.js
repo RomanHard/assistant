@@ -37,6 +37,7 @@ const LeftBlock = () => {
     fetch(`http://localhost:1727/deleteCategory/${categoryId}`, {
       method: 'DELETE',
     })
+      // .then((response) => response.json())
       .then((response) => response.json())
       .then((data) => console.log('Category deleted:', data))
       .catch((error) => console.error('Error deleting category:', error));
